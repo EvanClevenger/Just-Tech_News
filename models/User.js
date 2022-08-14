@@ -1,5 +1,5 @@
 const {Model, DataTypes} = require('sequelize');
-const sequelize = require('../config/connections');
+const sequelize = require('../config/connection');
 
 //create our user model
 class User extends Model{} //user inherits all of the functionality from Modle class has
