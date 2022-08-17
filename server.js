@@ -16,4 +16,5 @@ sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 });
 
+
 //{force:false} This doesn't have to be included, but if it were set to true, it would drop and re-create all of the database tables on startup
