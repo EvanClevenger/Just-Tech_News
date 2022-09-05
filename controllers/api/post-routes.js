@@ -28,11 +28,11 @@ router.get('/', (req, res) => {
      attributes: ['username']
    }
   ]
-})
-      .then(dbPostData => res.json(dbPostData))
+}).then(dbPostData => res.json(dbPostData))
       .catch(err => {
         console.log(err);
         res.status(500).json(err);
+      
       });
   });
 
