@@ -1,12 +1,41 @@
+const path = require('path');
 const express = require('express');
-const routes = require('./routes');
+const routes = require('./controllers');
 const sequelize = require('./config/connection');
+
+//for handlebars
+const exphbs = require('express-handlebars');
+const hbs = exphbs.create({});
+
+
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+//enables cookies/connects our session to our sequelize database.
+// const session = require('express-session');
+// const { Sequelize } = require('sequelize/types');
+// const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+// const sess = {
+//   secret: 'Super secret secret',
+//   cookie:{},
+//   resave: false,
+//   saveUninitiated: true,
+//   store: new SequelizeStore({
+//     db: sequelize
+//   })
+// };
+// app.use(session(sess));
+
+//handlebars
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
 // turn on routes
 app.use(routes);
