@@ -31,7 +31,10 @@ router.get('/', (req, res) => {
     //pass a single post object into the homepage template
     const posts = dbPostData.map(post => post.get({ plain: true }));// this will loop over and map each sequilze object inot a serialized version of itself saving the results in a new posts array.
     //console.log(dbPostData[0]);
-    res.render('homepage', {posts});
+    res.render('homepage', {
+      posts,
+      loggedIn: req.session.loggedIn
+    });
     
   })
   
@@ -76,17 +79,21 @@ router.get('/', (req, res) => {
     ]
    })
    .then(dbPostData => {
-    if (!dbPostData){
-      res.status(404).json({message: "No post found with this id"})
-      return;
-    }
+      if (!dbPostData){
+        res.status(404).json({message: "No post found with this id"})
+        return;
+      }
 
-    //serialzie the data
-    const post = dbPostData.get({ plain: true});
+      //serialzie the data
+      const post = dbPostData.get({ plain: true});
 
-    //pass data to template 
-    res.render('single-post', {post})
+      //pass data to template 
+      res.render('single-post', {
+        post,
+        loggedIn: req.session.loggedIn
+       })
    })
+   
 
    .catch(err => {
     console.log(err);

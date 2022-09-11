@@ -81,6 +81,16 @@ router.get('/', (req, res) => {
 
   // PUT /api/posts/upvote
 router.put('/upvote', (req, res) => {
+  if (req ,session) { //creating the session first
+    //pass session id along with all the destructred properties on req.body
+    Post.upvote({ ...req.bodu, user_id : req.session.user_id}, {Vote, Comment, User})
+    .then(updatedVoteData => res.json(updatedVoteData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err)
+    })
+  } //upvote funcitonality will only work when a user is logged In ^^^
+
   Vote.create({
     user_id: req.body.user_id,
     post_id: req.body.post_id
@@ -102,6 +112,7 @@ router.put('/upvote', (req, res) => {
         ]
       ]
     })
+
     .then(dbPostData => res.json(dbPostData))
     .catch(err => {
       console.log(err);
