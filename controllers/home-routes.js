@@ -42,6 +42,7 @@ router.get('/', (req, res) => {
     console.log(err)
     res.status(500).json(err)
   });
+});
 
   router.get('/login', (req ,res) =>{
     if (req.session.loggedIn){
@@ -94,14 +95,10 @@ router.get('/', (req, res) => {
        })
    })
    
-
    .catch(err => {
     console.log(err);
     res.status(500).json(err)
    })
   });
-
-});
-
 
 module.exports = router;

@@ -75,7 +75,8 @@ router.post('/', (req, res) => {
         res.json(dbUserData);
       });
     })
-    //login route
+})
+          //login route
     router.post('/login', (req, res) => {
       User.findOne({
         where: {
@@ -104,7 +105,6 @@ router.post('/', (req, res) => {
         });
       });
     });
- });
 
  router.post('/logout', (req , res) =>{
   if (req.session.loggedIn){
